@@ -6,7 +6,8 @@ using UdemyMVC.ServiceLayer;
 using UdemyMVC.ViewModels;
 
 namespace UdemyMVC.Controllers
-{
+{ 
+
 	public class RegisterController : Controller
 	{
 		UdemyDataBase context; 

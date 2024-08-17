@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
     Layout = "_Layout";
 }
-
+<div asp-validation-summary="All" class="text-danger"></div>
 <h1 class="display-4 text-center p-5 text-primary">Edit @Model.UserName Profile </h1>
 
 <div class="container">
@@ -22,11 +22,14 @@
         <div class="form-group my-3">
             <label class="form-label" for="Address">Address</label>
             <input type="text" class="form-control" name="Address" id="Address" asp-for="@Model.Address"/>
-        </div>
-        <div class="form-group my-3">
-            <label class="form-label" for="Age">Field</label>
-            <input type="text" class="form-control" name="Field" id="Age" asp-for="@Model.Field" />
-        </div>
+        </div> 
+        @if (User.IsInRole("Instructor"))
+        {
+            <div class="form-group my-3">
+                <label class="form-label" for="Age">Field</label>
+                <input type="text" class="form-control" name="Field" id="Age" asp-for="@Model.Field" />
+            </div>
+        }
         <div class="form-group my-3">
             <label class="form-label" for="profileImg">profileImg</label>
             <input type="file" accept="image/*" class="form-control" name="profileImg" id="profileImg"/>

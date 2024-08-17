@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using UdemyMVC.ViewModels;
 
 namespace UdemyMVC.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly IWebHostEnvironment webHostEnvironment;

@@ -17,10 +17,12 @@ namespace UdemyMVC.Controllers
             this.userManager = _userManager;
             this.signInManager = _signInManager;    
         }
-        public async Task<IActionResult> Login()
-        {
+        [HttpGet]
+        public  IActionResult Login()
+        { 
+           
             if (signInManager.IsSignedIn(User)) {
-                RedirectToAction("Main", "Home");
+                return RedirectToAction("Main", "Home");
             }
                 return View("Login", new LoginViewModelcs());
         }
@@ -42,7 +44,7 @@ namespace UdemyMVC.Controllers
                     return View("Login", vm);
                 }
                await signInManager.SignInAsync(result, vm.RememberMe);
-                RedirectToAction("Main", "Home");
+             return    RedirectToAction("Main", "Home");
             }
             return View("Login", vm); 
         }
@@ -54,7 +56,7 @@ namespace UdemyMVC.Controllers
                 return RedirectToAction("Login", "Account");
             }
             else {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account");    
             }
           
 

@@ -6,9 +6,11 @@ using System.Security.Claims;
 
 using UdemyMVC.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UdemyMVC.Controllers
 {
+    [Authorize]
     public class InstructorController : Controller
     {
         private readonly UserManager<ApplicationModel> userManager;
@@ -30,13 +32,13 @@ namespace UdemyMVC.Controllers
             return View("Profile",user);
         }
 
-<<<<<<< HEAD
-        public IActionResult ShowCourses() {
+        public IActionResult ShowCourses()
+        {
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-         ApplicationModel? user=   context.Users.Include(s => s.Enrolement).ThenInclude(s=>s.Course).FirstOrDefault(s=>s.Id==id);
-            return View("AllCourses",user);
-        
-=======
+            ApplicationModel? user = context.Users.Include(s => s.Enrolement).ThenInclude(s => s.Course).FirstOrDefault(s => s.Id == id);
+            return View("AllCourses", user);
+        }
+
         public IActionResult Edit(string id) {
             ApplicationModel? user = context.Users.Include(u => u.Course).FirstOrDefault(s=>s.Id==id);
             if (user == null) return NotFound();
@@ -54,13 +56,14 @@ namespace UdemyMVC.Controllers
 
         [HttpPost]
         public IActionResult SaveEdit(EditInstructorViewModel user,IFormFile profileImg) {
-            if(ModelState.IsValid) return View("Edit", user);
+
+            if(!ModelState.IsValid) return View("Edit", user);
             ApplicationModel? _user = context.Users.Include(u => u.Course).FirstOrDefault(s=>s.Id==user.Id);
             if (_user == null) return NotFound();
             _user.UserName = user.UserName;
             _user.Email = user.Email;
             _user.Address = user.Address;
-            _user.Field = user.Field;
+            _user.Field = user.Field ?? " ";
             if (profileImg != null) {
                 // delete old image
                 if (_user.Image != null) {
@@ -70,7 +73,7 @@ namespace UdemyMVC.Controllers
                     }
                 }
                 string? img = GetPhotoPath(profileImg);
-                _user.Image = img;
+                _user.Image = img; 
             }
             context.Users.Update(_user);
             context.SaveChanges();
@@ -93,7 +96,6 @@ namespace UdemyMVC.Controllers
                 return $"/uploads/+{uniquePath}";
             }
             return null;
->>>>>>> Sakr_Edits
         }
     }
 }
