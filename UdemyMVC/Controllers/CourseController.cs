@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 using System.Security.Claims;
 using UdemyMVC.Models;
 using UdemyMVC.ServiceLayer;
@@ -49,7 +51,23 @@ namespace UdemyMVC.Controllers
 
             return RedirectToAction("Main", "Home");
         }
+        public async Task<IActionResult> ViewCourse(int id) { 
+            ViewBag.CourseId = id;
+            Course? course = context.Courses.Include(s=>s.Instructor).FirstOrDefault(s=>s.ID == id);
+            ViewBag.UserID =User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            return View("ViewCourse" , course);
+        }
+        public IActionResult Enrollment(string userId, int CourseID) {
+            Enrollment en = new Enrollment
+            {
+                CourseID = CourseID,
+                UserID = userId
+            };   
+            context.Enrollments.Add(en);
+            context.SaveChanges();
 
+            return RedirectToAction("Main", "Home");
+        }
 
         private string? GetPhotoPath(IFormFile imageFile)
         {
