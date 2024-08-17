@@ -1,4 +1,10 @@
 ﻿<!-- Navbar Start -->
+
+@using Microsoft.AspNetCore.Identity     
+@using System.Security.Claims
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+} 
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
@@ -25,10 +31,10 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@User.Identity.Name</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="team.html" class="dropdown-item">Profile</a>
+                    <a asp-controller="Instructor" asp-action="Profile" asp-route-id="@userId" class="dropdown-item">Profile</a>
                         @if (User.IsInRole("User"))
                         {
-                            <a href="testimonial.html" class="dropdown-item">My Learning</a>
+                            <a class="dropdown-item" asp-controller="Instructor" asp-action="ShowCourses">My Learning</a>
                         }
                         @if (User.IsInRole("Instructor"))
                         {

@@ -1,0 +1,66 @@
+﻿@model Course 
+@{
+    string path = Model.CourseImage;
+    string newPath = path.Replace("+", "");
+}
+
+
+<section class="container-fluid">
+    <div class="container-fluid py-5 h-100">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="card">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color:#b8dfff; height:200px;">
+                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+
+                            <img src="@newPath"
+                                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                 style="width: 150px; z-index: 1">
+
+                        </div>
+
+                        <div class="ms-3" style="margin-top: 95px;">
+                            <h5 style="color:#06284b">@Model.CourseName</h5>
+                            <p style="color:#06284b">@Model.Title</p>
+                            <p style="color:#06284b"><strong>@Model.Instructor?.UserName</strong></p>
+
+                         
+                        </div>
+                    </div> 
+
+<div class="container mt-5 mb-5 "> 
+    <div class="row gap-2 align-content-center align-item-center justify-content-between">
+        <div class="col-lg-8 col-md-12">
+       <h3 style="color:#073845" class="mb-1">About</h3>
+      <p style="color:#073845" class="rounded-3 border border-info p-3">@Model.Description</p>
+
+        </div> 
+        <div class="col-lg-3 col-md-12 border border-primary rounde-4  mt-4 p-2">
+            <img  src="@newPath"class=" img-fluid img-thumbnail mb-2  "/>
+            <p style="color:#073845"class="mb-2">Title: @Model.Title</p>
+             <p style="color:#073845" class="mb-2">Instructor: @Model.Instructor.UserName</p>
+       <p style="color:#073845" class="mb-2">Price:$ @Model.Price</p>
+          <p style="color:#073845" class="mb-2">Houres: @Model.Hours</p>
+          <div class="text-center mt-2"> 
+             
+          <a class="btn btn-outline-info"
+         asp-controller="Course" asp-action="Enrollment" asp-route-userId="@ViewBag.UserID" asp-route-CourseID="@ViewBag.CourseId">
+     Enroll Now</a>
+              
+          </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -6,7 +6,7 @@ namespace UdemyMVC.Models
 	public class Enrollment
 	{ 
 
-        public int CourseID { get; set; }
+        public int CourseID { get; set; }   
         public string UserID { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
