@@ -123,7 +123,7 @@ namespace UdemyMVC.Controllers
 				var photoPath = Path.Combine(uploadPath, uniquePath);
 				using (var filestream = new FileStream(photoPath, FileMode.Create))
 				{
-			imageFile.CopyTo(filestream);
+					imageFile.CopyTo(filestream);
 					filestream.Close();
 				}
 				return $"/uploads/+{uniquePath}"; 

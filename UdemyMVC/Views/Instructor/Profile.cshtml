@@ -1,5 +1,6 @@
 ﻿@model ApplicationModel  
 @{
+    ViewData["Title"] = Model.UserName + "Profile";
     string path = Model.Image ;
     string newPath = path.Replace("+", "");
 }
@@ -27,10 +28,9 @@
                     
                         <div class="p-4 text-black bg-body-tertiary">
                            <div class="d-flex justify-content-between">
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark text-body" data-mdb-ripple-color="dark" style="z-index: 1;
-height:40px;">
+                            <a  data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark text-body" data-mdb-ripple-color="dark" style="z-index: 1;height:40px;" asp-controller="Instructor" asp-action="Edit" asp-route-id="@Model.Id">
                                 Edit profile
-                            </button>
+                            </a>
                            
                         
                         
